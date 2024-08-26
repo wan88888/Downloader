@@ -11,8 +11,7 @@ def before_feauture():
     global driver
     driver = u2.connect()
     driver.app_start("free.video.downloader.converter.music")
-    driver.implicitly_wait(10)
-    sleep(5)
+    driver.implicitly_wait(30)
     driver.watcher.when(
         '//*[@resource-id="free.video.downloader.converter.music:id/close_dialog_view"]').click()
     driver.watcher.start()
@@ -20,7 +19,6 @@ def before_feauture():
 
 @after_spec
 def after_feature():
-    sleep(5)
     driver.watcher.stop()
     driver.app_stop("free.video.downloader.converter.music")
 
@@ -30,7 +28,7 @@ def step_impl(word):
     driver(resourceId="free.video.downloader.converter.music:id/tvSearch").click()
     driver.send_keys(word, clear=True)
     driver.press('enter')
-    sleep(8)
+    sleep(10)
 
 
 @step("那么用户应该看到悬浮按钮亮起")
@@ -42,7 +40,7 @@ def step_impl():
 @step("当用户在当前页面点击悬浮下载按钮")
 def step_impl():
     driver(resourceId="free.video.downloader.converter.music:id/completeLoadView").click()
-    sleep(3)
+    sleep(2)
 
 
 @step("那么用户应该看到下载进度页")
